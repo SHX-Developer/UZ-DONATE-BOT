@@ -1,19 +1,19 @@
-from aiogram import Bot, Dispatcher, executor, types
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.dispatcher import FSMContext
-
-import sqlite3
 import datetime
+import sqlite3
+
+from aiogram import Bot, Dispatcher, executor, types
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
+                           KeyboardButton, ReplyKeyboardMarkup,
+                           ReplyKeyboardRemove)
 
 import config
 import inline_markups
 import reply_markups
-
-
-
-
+from data import (clash_of_clans_prices, exchange_info, free_fire_prices,
+                  greeting_text, mobile_legends_prices, pubg_prices)
 
 #  LIBRARY VARIABLES
 
@@ -43,87 +43,7 @@ db.commit()
 
 
 
-mobile_legends_prices = '''
-💎  8  -  1.500 uzs  (11 ₽)
-💎  35  -  6.000 сум  (44 ₽)
-💎  88  -  15.000 сум  (109 ₽) 
-💎  132  -  22.000 сум  (160 ₽)
-💎  264  -  43.000 сум  (312 ₽)
-💎  440  -  72.000 сум  (522 ₽)
-💎  734  -  115.000 сум  (834 ₽)
-💎  933  -  137.000 сум  (994 ₽)
-💎  1410  -  215.000 сум  (1559 ₽)
-💎  1881  -  288.000 сум  (2089 ₽)
-💎  2845  -  420.000  сум  (3045 ₽)
-💎  6163  -  875.000 сум  (6344 ₽)
-💎  WeeklyPass -18.000 сум (130₽)
 
-💳  8600120453183769
-💳  9860160104516572
-💳  4231200009317065
-
-🙋‍♂️  Донатер - @CyberDonater
-
-✈️  Наш телеграм канал (https://t.me/mobile_mlbb_legends)
-'''
-
-pubg_prices = '''
-60 UC  -  (91 ₽)
-325 UC  -  (440 ₽)
-660 UC  -  (910 ₽)
-1800 UC  -  (2248 ₽)
-3850 UC  -  (4500 ₽)
-8100 UC  -  (9100 ₽)
-RP Upgrade Pack A3  -  (1442 ₽)
-Elite RP Upgrade Pack A3  -  (3608 ₽)
-
-💳  8600120453183769
-💳  9860160104516572
-💳  4231200009317065
-
-🙋‍♂️  Донатер - @CyberDonater
-
-✈️  Наш телеграм канал (https://t.me/mobile_mlbb_legends)
-'''
-
-
-free_fire_prices = '''
-💎  100  -  (113 ₽)
-💎  210  -  (127 ₽)
-💎  530  -  (568 ₽)
-💎  645  -  (761 ₽)
-💎  1080  -  (1136 ₽)
-💎  2200  -  (2272 ₽)
-💎  4450  -  (5061 ₽)
-💎  6900  -  (7592 ₽)
-
-💳  8600120453183769
-💳  9860160104516572
-💳  4231200009317065
-
-🙋‍♂️  Донатер - @CyberDonater
-
-✈️  Наш телеграм канал (https://t.me/mobile_mlbb_legends)
-'''
-
-
-clash_of_clans_prices = '''
-💎  88  -  (101 ₽)
-💎  550  -  (511 ₽)
-💎  1320  -  (1022 ₽)
-💎  2750  -  (2047 ₽)
-💎  7150  -  (5119 ₽)
-💎  15400  -  (10239 ₽)
-💎  Gold Pass  -  (715 ₽)
-
-💳  8600120453183769
-💳  9860160104516572
-💳  4231200009317065
-
-🙋‍♂️  Донатер - @CyberDonater
-
-✈️  Наш телеграм канал (https://t.me/mobile_mlbb_legends)
-'''
 
 
 
@@ -135,15 +55,33 @@ async def start_command(message: types.Message):
     user_id = sql.fetchone()
 
     if user_id == None:
-        sql.execute('INSERT INTO user_access (id, username, firstname, lastname, date) VALUES (?, ?, ?, ?, ?)',
-        (message.chat.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name, date_time))
-        db.commit()
-
-        await bot.send_message(message.chat.id, '<b> Welcome ! </b>', parse_mode = 'html', reply_markup = None)
-
+        await add_new_user(message)
+        await send_greeting(message)
+        await send_menu(message)
     else:
-        await bot.send_message(message.chat.id, '<b> Main menu: </b>', parse_mode = 'html', reply_markup = None)
+        await send_menu(message)
 
+
+
+#  Add new user data to database
+async def add_new_user(message):
+    sql.execute('INSERT INTO user_access (id, username, firstname, lastname, date) VALUES (?, ?, ?, ?, ?)',
+    (message.chat.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name, date_time))
+    db.commit()
+
+#  Send greeting
+async def send_menu(message):
+    with open('photo/channel_photo.jpg', 'rb') as photo:
+        await bot.send_photo(
+            chat_id = message.chat.id,
+            photo = photo,
+            parse_mode = 'html',
+            reply_markup = inline_markups.menu)
+    action_message = await bot.send_message(message.chat.id, 'Выберите действие:')
+
+#  Send greeting
+async def send_greeting(message):
+    await bot.send_message(message.chat.id, greeting_text)
 
 
 
@@ -168,19 +106,34 @@ async def text(message: types.Message):
 
 
 
-
 #  CALLBACK
 @dp.callback_query_handler(lambda call: True)
 async def callback_queries(call: types.CallbackQuery):
 
 
 #  SEND MESSAGE
-    if call.data == 'callback_1':
-        await bot.send_message(
-            chat_id =call.message.chat.id, 
-            text = '<b> TEXT </b>', 
-            parse_mode = 'html', 
-            reply_markup = None)
+    if call.data == 'exchange':
+        with open(f"photo/channel_photo.jpg", "rb") as photo:
+            await bot.edit_message_media(
+                media = types.InputMedia(
+                type = 'photo',
+                media = photo,
+                caption = exchange_info),
+                chat_id = call.message.chat.id,
+                message_id = call.message.message_id,
+                reply_markup = inline_markups.exchange)
+
+    
+    elif call.data == 'back':
+        with open('photo/channel_photo.jpg', 'rb') as photo:
+            await bot.edit_message_media(
+                media = types.InputMedia(
+                type = 'photo',
+                media = photo),
+                chat_id = call.message.chat.id,
+                message_id = call.message.message_id,
+                reply_markup = inline_markups.menu)
+        
 
 
 #  DELETE INLINE MESSAGE
@@ -202,16 +155,16 @@ async def callback_queries(call: types.CallbackQuery):
 
 #  EDIT INLINE PHOTO
     if call.data == 'edit_photo':
-        with open('photo/photo.jpg', 'rb') as photo:
+        with open('photo/channel_photo.jpg', 'rb') as photo:
             bot.edit_message_media( 
                 media = types.InputMedia(
                 type = 'photo',
                 media = photo,
                 chat_id = call.message.chat.id,
                 message_id = call.message.message_id,
-                caption = '<b> TEXT </b>',
+                caption = exchange_info,
                 parse_mode = 'html'),
-                reply_markup = None)
+                reply_markup = inline_markups.exchange)
 
 
 
@@ -265,7 +218,29 @@ async def delete_message_3(message):
     except:
         pass
 
+#  DELETE MESSAGE 1
+async def delete_call_message_1(call):
+    try:
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id + 1)
+    except:
+        pass
 
+#  DELETE MESSAGE 2
+async def delete_call_message_2(call):
+    try:
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 1)
+    except:
+        pass
+
+#  DELETE MESSAGE 3
+async def delete_call_message_3(call):
+    try:
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 1)
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 2)
+    except:
+        pass
 
 
 
