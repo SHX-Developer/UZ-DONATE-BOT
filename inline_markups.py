@@ -3,7 +3,14 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 #  INLINE
-inline = InlineKeyboardMarkup()
-inline.row(InlineKeyboardButton(text = "button_1", callback_data = "button_1"))
-inline.row(InlineKeyboardButton(text = "button_2", callback_data = "button_2"))
-inline.row(InlineKeyboardButton(text = "button_3", callback_data = "button_3"))
+menu = InlineKeyboardMarkup()
+menu.row(InlineKeyboardButton(text = "💎  Задонатить", callback_data = "donate"))
+menu.row(InlineKeyboardButton(text = "🎮  Игры", callback_data = "games"),
+         InlineKeyboardButton(text = "💸  Обменник", callback_data = "exchange"))
+menu.row(InlineKeyboardButton(text = "🆘  Связаться", callback_data = "contact"),
+         InlineKeyboardButton(text = "🌐  Язык", callback_data = "language"))
+
+
+exchange = InlineKeyboardMarkup()
+exchange.row(InlineKeyboardButton(text = "Обменять", url = 'https://t.me/CyberDonater'))
+exchange.row(InlineKeyboardButton(text = "Назад", callback_data = "back"))
