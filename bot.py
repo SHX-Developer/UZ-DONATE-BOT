@@ -1,6 +1,3 @@
-import datetime
-import sqlite3
-
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
@@ -9,11 +6,17 @@ from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
                            KeyboardButton, ReplyKeyboardMarkup,
                            ReplyKeyboardRemove)
 
+import datetime
+import sqlite3
+
 import config
 import inline_markups
 import reply_markups
+import display
 from data import (clash_of_clans_prices, exchange_info, free_fire_prices,
                   greeting_text, mobile_legends_prices, pubg_prices)
+
+
 
 #  LIBRARY VARIABLES
 
@@ -77,7 +80,7 @@ async def send_menu(message):
             photo = photo,
             parse_mode = 'html',
             reply_markup = inline_markups.menu)
-    action_message = await bot.send_message(message.chat.id, 'Выберите действие:')
+    await bot.send_message(message.chat.id, 'Выберите действие:')
 
 #  Send greeting
 async def send_greeting(message):
@@ -90,18 +93,7 @@ async def send_greeting(message):
 
 @dp.message_handler()
 async def text(message: types.Message):
-    
-    if message.text == 'TEXT':
-        await bot.send_message(message.chat.id, '<b> TEXT </b>', parse_mode = 'html', reply_markup = None)
-
-    elif message.text == 'TEXT':
-        await bot.send_message(message.chat.id, '<b> TEXT </b>', parse_mode = 'html', reply_markup = None)
-
-    elif message.text == 'TEXT':
-        await bot.send_message(message.chat.id, '<b> TEXT </b>', parse_mode = 'html', reply_markup = None)
-
-    else:
-        await bot.send_message(message.chat.id, '<b> TEXT </b>', parse_mode = 'html', reply_markup = None)
+    pass
 
 
 
@@ -111,20 +103,9 @@ async def text(message: types.Message):
 async def callback_queries(call: types.CallbackQuery):
 
 
-#  SEND MESSAGE
-    if call.data == 'exchange':
-        with open(f"photo/channel_photo.jpg", "rb") as photo:
-            await bot.edit_message_media(
-                media = types.InputMedia(
-                type = 'photo',
-                media = photo,
-                caption = exchange_info),
-                chat_id = call.message.chat.id,
-                message_id = call.message.message_id,
-                reply_markup = inline_markups.exchange)
-
+#  EXCHANGE
     
-    elif call.data == 'back':
+    if call.data == 'donate':
         with open('photo/channel_photo.jpg', 'rb') as photo:
             await bot.edit_message_media(
                 media = types.InputMedia(
@@ -132,8 +113,46 @@ async def callback_queries(call: types.CallbackQuery):
                 media = photo),
                 chat_id = call.message.chat.id,
                 message_id = call.message.message_id,
-                reply_markup = inline_markups.menu)
+                reply_markup = inline_markups.games)
+            
+
+#  GAMES
+            
+    elif call.data == 'mobile_legends':
+        await display.display_mobile_legends(call)
         
+
+    elif call.data == 'pubg':
+        await display.display_pubg(call)
+    
+    elif call.data == 'free_fire':
+        await display.display_free_fire(call)
+    
+    elif call.data == 'clash_of_clans':
+        await display.display_clash_of_clans(call)
+            
+
+
+
+#  EXCHANGE
+    elif call.data == 'exchange':
+        await display.display_exchange(call)
+
+
+
+
+
+#  BACK MENU
+    elif call.data == 'back_menu':
+        await display.display_menu(call)
+        
+
+
+
+
+
+
+
 
 
 #  DELETE INLINE MESSAGE
