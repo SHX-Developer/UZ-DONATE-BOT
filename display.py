@@ -2,7 +2,6 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton
 
 import sqlite3
-import datetime
 
 import config
 import data
@@ -10,7 +9,7 @@ import inline_markups
 
 
 
-#  LIBRARY VARIABLES
+#  Library Variables
 
 bot = Bot(config.token)
 dp = Dispatcher(bot)
@@ -18,7 +17,35 @@ dp = Dispatcher(bot)
 db = sqlite3.connect('database.db', check_same_thread = False)
 sql = db.cursor()
 
-date_time = datetime.datetime.now().date()
+
+
+
+
+#  Display Menu
+async def display_menu(call):
+    with open('photo/channel_photo.jpg', 'rb') as photo:
+        await bot.edit_message_media(
+            media = types.InputMedia(
+            type = 'photo',
+            media = photo),
+            chat_id = call.message.chat.id,
+            message_id = call.message.message_id,
+            reply_markup = inline_markups.menu)
+
+
+
+#  Display Games
+async def display_games(call):
+    with open('photo/channel_photo.jpg', 'rb') as photo:
+        await bot.edit_message_media(
+            media = types.InputMedia(
+            type = 'photo',
+            media = photo),
+            chat_id = call.message.chat.id,
+            message_id = call.message.message_id,
+            reply_markup = inline_markups.games)
+        
+
 
 
 
@@ -46,7 +73,7 @@ async def display_pubg(call):
             caption = data.pubg_prices),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.games)
+            reply_markup = inline_markups.pubg)
 
 #  Display Free Fire
 async def display_free_fire(call):
@@ -59,7 +86,7 @@ async def display_free_fire(call):
             caption = data.free_fire_prices),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.games)
+            reply_markup = inline_markups.free_fire)
 
 #  Display Clash Of Clans
 async def display_clash_of_clans(call):
@@ -72,7 +99,8 @@ async def display_clash_of_clans(call):
             caption = data.clash_of_clans_prices),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.games)
+            reply_markup = inline_markups.clash_of_clans)
+
 
 
 
@@ -85,6 +113,7 @@ async def display_exchange(call):
             media = types.InputMedia(
             type = 'photo',
             media = photo,
+            parse_mode = 'html',
             caption = data.exchange_info),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
@@ -92,15 +121,35 @@ async def display_exchange(call):
 
 
 
-
-
-#  Display Menu
-async def display_menu(call):
-    with open('photo/channel_photo.jpg', 'rb') as photo:
+#  Display Currency
+async def display_currency(call):
+    with open(f"photo/channel_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
             media = types.InputMedia(
             type = 'photo',
-            media = photo),
+            media = photo,
+            parse_mode = 'html'),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.menu)
+            reply_markup = inline_markups.currency)
+
+
+
+#  Display Language
+async def display_language(call):
+    with open(f"photo/channel_photo.jpg", "rb") as photo:
+        await bot.edit_message_media(
+            media = types.InputMedia(
+            type = 'photo',
+            media = photo,
+            parse_mode = 'html'),
+            chat_id = call.message.chat.id,
+            message_id = call.message.message_id,
+            reply_markup = inline_markups.language)
+
+
+
+
+
+
+

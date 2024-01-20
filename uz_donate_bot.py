@@ -5,7 +5,6 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
                            KeyboardButton, ReplyKeyboardMarkup,
                            ReplyKeyboardRemove)
-
 import datetime
 import sqlite3
 
@@ -13,15 +12,12 @@ import config
 import inline_markups
 import reply_markups
 import display
-from data import (clash_of_clans_prices, exchange_info, free_fire_prices,
-                  greeting_text, mobile_legends_prices, pubg_prices)
+import data
+import functions
 
 
-
-#  LIBRARY VARIABLES
-
+#  Library Variables
 storage = MemoryStorage()
-
 bot = Bot(config.token)
 dp = Dispatcher(bot, storage = MemoryStorage())
 
@@ -32,15 +28,13 @@ date_time = datetime.datetime.now().date()
 
 
 
-#  STATES
-
+#  Class States
 class States(StatesGroup):
     value = State()
 
-
-
-#  CREATING DATABASE
+#  Creating Databases
 sql.execute('CREATE TABLE IF NOT EXISTS user_access (id INTEGER, username TEXT, firstname TEXT, lastname TEXT, date DATE)')
+sql.execute('CREATE TABLE IF NOT EXISTS user_data (id INTEGER, language TEXT, currency TEXT)')
 db.commit()
 
 
@@ -54,43 +48,19 @@ db.commit()
 
 @dp.message_handler(commands = ['start'])
 async def start_command(message: types.Message):
-    sql.execute('SELECT id FROM user_access WHERE id = ?', (message.chat.id,))
-    user_id = sql.fetchone()
+    user_id = sql.execute(f'SELECT id FROM user_access WHERE id = {message.chat.id}').fetchone()
 
     if user_id == None:
-        await add_new_user(message)
-        await send_greeting(message)
-        await send_menu(message)
+        await functions.add_new_user(message)
+        await functions.send_greeting(message)
+        await functions.send_menu(message)
     else:
-        await send_menu(message)
-
-
-
-#  Add new user data to database
-async def add_new_user(message):
-    sql.execute('INSERT INTO user_access (id, username, firstname, lastname, date) VALUES (?, ?, ?, ?, ?)',
-    (message.chat.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name, date_time))
-    db.commit()
-
-#  Send greeting
-async def send_menu(message):
-    with open('photo/channel_photo.jpg', 'rb') as photo:
-        await bot.send_photo(
-            chat_id = message.chat.id,
-            photo = photo,
-            parse_mode = 'html',
-            reply_markup = inline_markups.menu)
-    await bot.send_message(message.chat.id, 'Выберите действие:')
-
-#  Send greeting
-async def send_greeting(message):
-    await bot.send_message(message.chat.id, greeting_text)
+        await functions.send_menu(message)
 
 
 
 
-#  TEXT
-
+#  Message Handler
 @dp.message_handler()
 async def text(message: types.Message):
     pass
@@ -98,22 +68,15 @@ async def text(message: types.Message):
 
 
 
-#  CALLBACK
+#  Callback Handler
 @dp.callback_query_handler(lambda call: True)
 async def callback_queries(call: types.CallbackQuery):
 
 
-#  EXCHANGE
+#  DONATE
     
     if call.data == 'donate':
-        with open('photo/channel_photo.jpg', 'rb') as photo:
-            await bot.edit_message_media(
-                media = types.InputMedia(
-                type = 'photo',
-                media = photo),
-                chat_id = call.message.chat.id,
-                message_id = call.message.message_id,
-                reply_markup = inline_markups.games)
+        await display.display_games(call)
             
 
 #  GAMES
@@ -140,7 +103,25 @@ async def callback_queries(call: types.CallbackQuery):
 
 
 
+#  Contact
+    elif call.data == 'contact':
+        pass
 
+
+
+#  Currency
+    elif call.data == 'currency':
+        await display.display_currency(call)
+
+#  Language
+    elif call.data == 'language':
+        await display.display_language(call)
+
+
+#  BACK GAMES
+        
+    elif call.data == 'back_games':
+        await display.display_games(call)
 
 #  BACK MENU
     elif call.data == 'back_menu':
@@ -155,11 +136,7 @@ async def callback_queries(call: types.CallbackQuery):
 
 
 
-#  DELETE INLINE MESSAGE
-    elif call.data == 'delete_inline':
-        await bot.delete_message(
-            chat_id = call.message.chat.id, 
-            message_id = call.message.message_id)
+
 
 
 #  EDIT INLINE TEXT
@@ -181,7 +158,7 @@ async def callback_queries(call: types.CallbackQuery):
                 media = photo,
                 chat_id = call.message.chat.id,
                 message_id = call.message.message_id,
-                caption = exchange_info,
+                caption = data.exchange_info,
                 parse_mode = 'html'),
                 reply_markup = inline_markups.exchange)
 
