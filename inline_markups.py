@@ -12,6 +12,16 @@ menu.row(InlineKeyboardButton(text = "💸  Валюта", callback_data = "curr
 
 
 
+#  Contact
+contact = InlineKeyboardMarkup()
+contact.row(InlineKeyboardButton(text = "✅  Донатер", url = 'https://t.me/CyberDonater'))
+contact.row(InlineKeyboardButton(text = "📢  Канал", url = 'https://t.me/mobile_mlbb_legends'),
+          InlineKeyboardButton(text = "👥  Группа", url = 'https://t.me/MLBBCommunityyy'))
+contact.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
+
+
+
+
 #  Games
 games = InlineKeyboardMarkup()
 games.row(InlineKeyboardButton(text = "Mobile Legends",callback_data = 'mobile_legends'),
@@ -25,17 +35,20 @@ games.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_me
 #  Mobile Legends
 mobile_legends = InlineKeyboardMarkup()
 mobile_legends.row(InlineKeyboardButton(text = "💎 8", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "💎 35", url = 'https://t.me/CyberDonater'))
-mobile_legends.row(InlineKeyboardButton(text = "💎 88", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "💎 132", url = 'https://t.me/CyberDonater'))
-mobile_legends.row(InlineKeyboardButton(text = "💎 264", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 35", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 88", url = 'https://t.me/CyberDonater'))
+mobile_legends.row(InlineKeyboardButton(text = "💎 132", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 264", url = 'https://t.me/CyberDonater'),
                    InlineKeyboardButton(text = "💎 440", url = 'https://t.me/CyberDonater'))
 mobile_legends.row(InlineKeyboardButton(text = "💎 734", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "💎 933", url = 'https://t.me/CyberDonater'))
-mobile_legends.row(InlineKeyboardButton(text = "💎 1410", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "💎 1881", url = 'https://t.me/CyberDonater'))
-mobile_legends.row(InlineKeyboardButton(text = "💎 2845", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 933", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 1410", url = 'https://t.me/CyberDonater'))
+mobile_legends.row(InlineKeyboardButton(text = "💎 1881", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "💎 2845", url = 'https://t.me/CyberDonater'),
                    InlineKeyboardButton(text = "💎 6163", url = 'https://t.me/CyberDonater'))
+mobile_legends.row(InlineKeyboardButton(text = "🏷  Weekly Pass", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "🏷  Twilight Pass", url = 'https://t.me/CyberDonater'))
+mobile_legends.row(InlineKeyboardButton(text = "💳  Заказать", url = 'https://t.me/CyberDonater'))
 mobile_legends.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
 
 
@@ -43,13 +56,14 @@ mobile_legends.row(InlineKeyboardButton(text = "<<  Назад", callback_data =
 #  Pubg
 pubg = InlineKeyboardMarkup()
 pubg.row(InlineKeyboardButton(text = "💵 60", url = 'https://t.me/CyberDonater'),
-         InlineKeyboardButton(text = "💵 325", url = 'https://t.me/CyberDonater'))
-pubg.row(InlineKeyboardButton(text = "💵 660", url = 'https://t.me/CyberDonater'),
-         InlineKeyboardButton(text = "💵 1800", url = 'https://t.me/CyberDonater'))
-pubg.row(InlineKeyboardButton(text = "💵 3850", url = 'https://t.me/CyberDonater'),
+         InlineKeyboardButton(text = "💵 325", url = 'https://t.me/CyberDonater'),
+         InlineKeyboardButton(text = "💵 660", url = 'https://t.me/CyberDonater'))
+pubg.row(InlineKeyboardButton(text = "💵 1800", url = 'https://t.me/CyberDonater'),
+         InlineKeyboardButton(text = "💵 3850", url = 'https://t.me/CyberDonater'),
          InlineKeyboardButton(text = "💵 8100", url = 'https://t.me/CyberDonater'))
-pubg.row(InlineKeyboardButton(text = "💵 RP", url = 'https://t.me/CyberDonater'),
-         InlineKeyboardButton(text = "💵 Elite RP", url = 'https://t.me/CyberDonater'))
+pubg.row(InlineKeyboardButton(text = "🏷  RP", url = 'https://t.me/CyberDonater'),
+         InlineKeyboardButton(text = "🏷  Elite RP", url = 'https://t.me/CyberDonater'))
+pubg.row(InlineKeyboardButton(text = "💳 Заказать", url = 'https://t.me/CyberDonater'))
 pubg.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
 
 
@@ -57,13 +71,14 @@ pubg.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_gam
 #  Free Fire
 free_fire = InlineKeyboardMarkup()
 free_fire.row(InlineKeyboardButton(text = "💎 100", url = 'https://t.me/CyberDonater'),
-              InlineKeyboardButton(text = "💎 210", url = 'https://t.me/CyberDonater'))
-free_fire.row(InlineKeyboardButton(text = "💎 530", url = 'https://t.me/CyberDonater'),
-              InlineKeyboardButton(text = "💎 645", url = 'https://t.me/CyberDonater'))
-free_fire.row(InlineKeyboardButton(text = "💎 1080", url = 'https://t.me/CyberDonater'),
+              InlineKeyboardButton(text = "💎 210", url = 'https://t.me/CyberDonater'),
+              InlineKeyboardButton(text = "💎 530", url = 'https://t.me/CyberDonater'))
+free_fire.row(InlineKeyboardButton(text = "💎 645", url = 'https://t.me/CyberDonater'),
+              InlineKeyboardButton(text = "💎 1080", url = 'https://t.me/CyberDonater'),
               InlineKeyboardButton(text = "💎 2200", url = 'https://t.me/CyberDonater'))
 free_fire.row(InlineKeyboardButton(text = "💎 4450", url = 'https://t.me/CyberDonater'),
               InlineKeyboardButton(text = "💎 6900", url = 'https://t.me/CyberDonater'))
+free_fire.row(InlineKeyboardButton(text = "💳  Заказать", url = 'https://t.me/CyberDonater'))
 free_fire.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
 
 
@@ -71,12 +86,13 @@ free_fire.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "bac
 #  Clash Of Clans
 clash_of_clans = InlineKeyboardMarkup()
 clash_of_clans.row(InlineKeyboardButton(text = "❇️ 88", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "❇️ 550", url = 'https://t.me/CyberDonater'))
-clash_of_clans.row(InlineKeyboardButton(text = "❇️ 1320", url = 'https://t.me/CyberDonater'),
-                   InlineKeyboardButton(text = "❇️ 2750", url = 'https://t.me/CyberDonater'))
-clash_of_clans.row(InlineKeyboardButton(text = "❇️ 7150", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "❇️ 550", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "❇️ 1320", url = 'https://t.me/CyberDonater'))
+clash_of_clans.row(InlineKeyboardButton(text = "❇️ 2750", url = 'https://t.me/CyberDonater'),
+                   InlineKeyboardButton(text = "❇️ 7150", url = 'https://t.me/CyberDonater'),
                    InlineKeyboardButton(text = "❇️ 15400", url = 'https://t.me/CyberDonater'))
-clash_of_clans.row(InlineKeyboardButton(text = "❇️ Gold Pass", url = 'https://t.me/CyberDonater'))
+clash_of_clans.row(InlineKeyboardButton(text = "🏷 Gold Pass", url = 'https://t.me/CyberDonater'))
+clash_of_clans.row(InlineKeyboardButton(text = "💳 Заказать", url = 'https://t.me/CyberDonater'))
 clash_of_clans.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
 
 
@@ -94,13 +110,12 @@ exchange.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back
 #  Currency
 currency = InlineKeyboardMarkup()
 currency.row(InlineKeyboardButton(text = "UZS", callback_data = 'uzs'),
-             InlineKeyboardButton(text = "RUB", callback_data = "rub"),
-             InlineKeyboardButton(text = "USD", callback_data = "usd"))
+             InlineKeyboardButton(text = "RUB", callback_data = "rub"))
 currency.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
 
 
+#  Language
 language = InlineKeyboardMarkup()
 language.row(InlineKeyboardButton(text = "Uzbek", callback_data = 'uzbek'),
-             InlineKeyboardButton(text = "Русский", callback_data = "russian"),
-             InlineKeyboardButton(text = "English", callback_data = "english"))
+             InlineKeyboardButton(text = "Русский", callback_data = "russian"))
 language.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))

@@ -7,6 +7,7 @@ import datetime
 import config
 import data
 import inline_markups
+import display
 
 
 
@@ -51,3 +52,36 @@ async def send_menu(message):
 
 
 
+
+
+
+
+
+#  Add UZS
+async def add_uzs_currency(call):
+    sql.execute('UPDATE user_data SET currency = ? WHERE id = ?', ('uzs', call.message.chat.id))
+    db.commit()
+    await display.display_currency(call)
+
+#  Add RUB
+async def add_rub_currency(call):
+    sql.execute('UPDATE user_data SET currency = ? WHERE id = ?', ('rub', call.message.chat.id))
+    db.commit()
+    await display.display_currency(call)
+
+
+
+
+
+#  Add Uzbek Language
+async def add_uzbek_language(call):
+    sql.execute('UPDATE user_data SET language = ? WHERE id = ?', ('uzbek', call.message.chat.id))
+    db.commit()
+    await display.display_language(call)
+
+#  Add Russian Language
+async def add_russian_language(call):
+    sql.execute('UPDATE user_data SET language = ? WHERE id = ?', ('russian', call.message.chat.id))
+    db.commit()
+    await display.display_language(call)
+    

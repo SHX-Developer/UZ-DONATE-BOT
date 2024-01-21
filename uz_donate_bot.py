@@ -105,7 +105,7 @@ async def callback_queries(call: types.CallbackQuery):
 
 #  Contact
     elif call.data == 'contact':
-        pass
+        await display.display_contact(call)
 
 
 
@@ -118,16 +118,39 @@ async def callback_queries(call: types.CallbackQuery):
         await display.display_language(call)
 
 
-#  BACK GAMES
-        
+#  BACK
+
+    #  Back Games
     elif call.data == 'back_games':
         await display.display_games(call)
 
-#  BACK MENU
+    #  Back Menu
     elif call.data == 'back_menu':
         await display.display_menu(call)
         
 
+
+#  CURRENCY
+    
+    #  UZS
+    elif call.data == 'uzs':
+        await functions.add_uzs_currency(call)
+
+    #  RUB
+    elif call.data == 'rub':
+        await functions.add_rub_currency(call)
+
+
+
+#  LANGUAGE
+    
+    #  Uzbek Language
+    elif call.data == 'uzbek':
+        await functions.add_uzbek_language(call)
+
+    #  Russian Language
+    elif call.data == 'russian':
+        await functions.add_russian_language(call)
 
 
 
