@@ -14,7 +14,7 @@ import inline_markups
 bot = Bot(config.token)
 dp = Dispatcher(bot)
 
-db = sqlite3.connect('database.db', check_same_thread = False)
+db = sqlite3.connect('uz_donate_database.db', check_same_thread = False)
 sql = db.cursor()
 
 
@@ -24,6 +24,7 @@ sql = db.cursor()
 #  Display Menu
 async def display_menu(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         menu = inline_markups.uz_menu
     else:
@@ -43,6 +44,7 @@ async def display_menu(call):
 #  Display Games
 async def display_games(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         games = inline_markups.uz_games
     else:
@@ -88,6 +90,7 @@ async def display_mobile_legends(call):
             reply_markup = mobile_legends)
 
 
+
 #  Display Pubg
 async def display_pubg(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
@@ -115,6 +118,7 @@ async def display_pubg(call):
             reply_markup = pubg)
 
 
+
 #  Display Free Fire
 async def display_free_fire(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
@@ -140,6 +144,7 @@ async def display_free_fire(call):
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
             reply_markup = free_fire)
+
 
 
 #  Display Clash Of Clans
@@ -171,6 +176,7 @@ async def display_clash_of_clans(call):
 
 
 
+
 #  Contact
 async def display_contact(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
@@ -193,16 +199,16 @@ async def display_contact(call):
 
 
 
-
-
-
 #  Display Exchange
 async def display_exchange(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         exchange = inline_markups.uz_exchange
+        exchange_info = data.uz_exchange_text
     else:
         exchange = inline_markups.ru_exchange
+        exchange_info = data.ru_exchange_text
 
     with open(f"photo/exchange_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
@@ -210,7 +216,7 @@ async def display_exchange(call):
             type = 'photo',
             media = photo,
             parse_mode = 'html',
-            caption = data.exchange_info),
+            caption = exchange_info),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
             reply_markup = exchange)

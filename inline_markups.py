@@ -1,11 +1,11 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
+
 #  Register Language
 register_language = InlineKeyboardMarkup()
 register_language.row(InlineKeyboardButton(text = "🇺🇿  O'zbekcha", callback_data = "reg_uz"),
                       InlineKeyboardButton(text = "🇷🇺  Русский", callback_data = "reg_ru"))
-
 
 #  Register Currency
 register_currency = InlineKeyboardMarkup()
@@ -42,7 +42,6 @@ ru_contact.row(InlineKeyboardButton(text = "📢  Канал", url = 'https://t.
                InlineKeyboardButton(text = "👥  Группа", url = 'https://t.me/MLBBCommunityyy'))
 ru_contact.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
 
-
 #  Contact (UZ)
 uz_contact = InlineKeyboardMarkup()
 uz_contact.row(InlineKeyboardButton(text = "✅  Donater", url = 'https://t.me/CyberDonater'))
@@ -61,7 +60,6 @@ ru_games.row(InlineKeyboardButton(text = "Mobile Legends",callback_data = 'mobil
 ru_games.row(InlineKeyboardButton(text = "Free Fire",callback_data = 'free_fire'),
              InlineKeyboardButton(text = "Clash Of Clans",callback_data = 'clash_of_clans'))
 ru_games.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
 
 #  Games (UZ)
 uz_games = InlineKeyboardMarkup()
@@ -94,7 +92,6 @@ ru_mobile_legends.row(InlineKeyboardButton(text = "🏷  Weekly Pass", url = 'ht
 ru_mobile_legends.row(InlineKeyboardButton(text = "💳  Заказать", url = 'https://t.me/CyberDonater'))
 ru_mobile_legends.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
 
-
 #  Mobile Legends (UZ)
 uz_mobile_legends = InlineKeyboardMarkup()
 uz_mobile_legends.row(InlineKeyboardButton(text = "💎 8", url = 'https://t.me/CyberDonater'),
@@ -116,8 +113,6 @@ uz_mobile_legends.row(InlineKeyboardButton(text = "<<  Orqaga", callback_data = 
 
 
 
-
-
 #  Pubg (RU)
 ru_pubg = InlineKeyboardMarkup()
 ru_pubg.row(InlineKeyboardButton(text = "💵 60", url = 'https://t.me/CyberDonater'),
@@ -130,7 +125,6 @@ ru_pubg.row(InlineKeyboardButton(text = "🏷  RP", url = 'https://t.me/CyberDon
          InlineKeyboardButton(text = "🏷  Elite RP", url = 'https://t.me/CyberDonater'))
 ru_pubg.row(InlineKeyboardButton(text = "💳  Заказать", url = 'https://t.me/CyberDonater'))
 ru_pubg.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
-
 
 #  Pubg (UZ)
 uz_pubg = InlineKeyboardMarkup()
@@ -147,8 +141,6 @@ uz_pubg.row(InlineKeyboardButton(text = "<<  Orqaga", callback_data = "back_game
 
 
 
-
-
 #  Free Fire  (RU)
 ru_free_fire = InlineKeyboardMarkup()
 ru_free_fire.row(InlineKeyboardButton(text = "💎 100", url = 'https://t.me/CyberDonater'),
@@ -161,7 +153,6 @@ ru_free_fire.row(InlineKeyboardButton(text = "💎 4450", url = 'https://t.me/Cy
                  InlineKeyboardButton(text = "💎 6900", url = 'https://t.me/CyberDonater'))
 ru_free_fire.row(InlineKeyboardButton(text = "💳  Заказать", url = 'https://t.me/CyberDonater'))
 ru_free_fire.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
-
 
 #  Free Fire  (UZ)
 uz_free_fire = InlineKeyboardMarkup()
@@ -178,8 +169,6 @@ uz_free_fire.row(InlineKeyboardButton(text = "<<  Orqaga", callback_data = "back
 
 
 
-
-
 #  Clash Of Clans (RU)
 ru_clash_of_clans = InlineKeyboardMarkup()
 ru_clash_of_clans.row(InlineKeyboardButton(text = "❇️ 88", url = 'https://t.me/CyberDonater'),
@@ -191,7 +180,6 @@ ru_clash_of_clans.row(InlineKeyboardButton(text = "❇️ 2750", url = 'https://
 ru_clash_of_clans.row(InlineKeyboardButton(text = "🏷 Gold Pass", url = 'https://t.me/CyberDonater'))
 ru_clash_of_clans.row(InlineKeyboardButton(text = "💳 Заказать", url = 'https://t.me/CyberDonater'))
 ru_clash_of_clans.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_games"))
-
 
 #  Clash Of Clans (UZ)
 uz_clash_of_clans = InlineKeyboardMarkup()
@@ -209,57 +197,13 @@ uz_clash_of_clans.row(InlineKeyboardButton(text = "<<  Orqaga", callback_data = 
 
 
 
-
-
-
 #  Exchange (RU)
 ru_exchange = InlineKeyboardMarkup()
-ru_exchange.row(InlineKeyboardButton(text = "Обменять", url = 'https://t.me/CyberDonater'))
+ru_exchange.row(InlineKeyboardButton(text = "♻️  Обменять", url = 'https://t.me/CyberDonater'))
 ru_exchange.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
 
 #  Exchange (UZ)
 uz_exchange = InlineKeyboardMarkup()
-uz_exchange.row(InlineKeyboardButton(text = "Almashtirish", url = 'https://t.me/CyberDonater'))
+uz_exchange.row(InlineKeyboardButton(text = "♻️  Almashtirish", url = 'https://t.me/CyberDonater'))
 uz_exchange.row(InlineKeyboardButton(text = "<<  Orqaga", callback_data = "back_menu"))
-
-
-
-
-
-
-
-
-#  Currency (RU)
-ru_currency = InlineKeyboardMarkup()
-ru_currency.row(InlineKeyboardButton(text = "UZS", callback_data = 'uzs'),
-                InlineKeyboardButton(text = "RUB", callback_data = "rub"))
-ru_currency.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
-
-#  Currency (UZ)
-uz_currency = InlineKeyboardMarkup()
-uz_currency.row(InlineKeyboardButton(text = "UZS", callback_data = 'uzs'),
-                InlineKeyboardButton(text = "RUB", callback_data = "rub"))
-uz_currency.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
-
-
-
-
-
-#  Language (RU)
-ru_language = InlineKeyboardMarkup()
-ru_language.row(InlineKeyboardButton(text = "Uzbek", callback_data = 'uzbek'),
-                InlineKeyboardButton(text = "Русский", callback_data = "russian"))
-ru_language.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
-
-#  Language (UZ)
-uz_language = InlineKeyboardMarkup()
-uz_language.row(InlineKeyboardButton(text = "Uzbek", callback_data = 'uzbek'),
-                InlineKeyboardButton(text = "Русский", callback_data = "russian"))
-uz_language.row(InlineKeyboardButton(text = "<<  Назад", callback_data = "back_menu"))
-
-
 

@@ -10,7 +10,6 @@ import sqlite3
 
 import config
 import inline_markups
-import reply_markups
 import display
 import data
 import functions
@@ -21,7 +20,7 @@ storage = MemoryStorage()
 bot = Bot(config.token)
 dp = Dispatcher(bot, storage = MemoryStorage())
 
-db = sqlite3.connect('database.db', check_same_thread = False)
+db = sqlite3.connect('uz_donate_database.db', check_same_thread = False)
 sql = db.cursor()
 
 date_time = datetime.datetime.now().date()
@@ -261,57 +260,6 @@ async def check_state(message: types.Message, state: FSMContext):
 
 
 
-
-
-
-
-#  DELETE MESSAGE 1
-async def delete_message_1(message):
-    try:
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id)
-    except:
-        pass
-
-#  DELETE MESSAGE 2
-async def delete_message_2(message):
-    try:
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id)
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id - 1)
-    except:
-        pass
-
-#  DELETE MESSAGE 3
-async def delete_message_3(message):
-    try:
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id)
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id - 1)
-        await bot.delete_message(chat_id = message.chat.id, message_id = message.message_id - 2)
-    except:
-        pass
-
-#  DELETE MESSAGE 1
-async def delete_call_message_1(call):
-    try:
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id + 1)
-    except:
-        pass
-
-#  DELETE MESSAGE 2
-async def delete_call_message_2(call):
-    try:
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 1)
-    except:
-        pass
-
-#  DELETE MESSAGE 3
-async def delete_call_message_3(call):
-    try:
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 1)
-        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id - 2)
-    except:
-        pass
 
 
 

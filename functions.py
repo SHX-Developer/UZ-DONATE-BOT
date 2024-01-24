@@ -16,11 +16,10 @@ import display
 bot = Bot(config.token)
 dp = Dispatcher(bot)
 
-db = sqlite3.connect('database.db', check_same_thread = False)
+db = sqlite3.connect('uz_donate_database.db', check_same_thread = False)
 sql = db.cursor()
 
 date_time = datetime.datetime.now().date()
-
 
 
 
@@ -37,9 +36,11 @@ async def add_new_user(message):
 
 
 
+
 #  Request Currency
 async def request_currency(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         request_currency_text = data.uz_register_currency_text
     else:
@@ -50,10 +51,6 @@ async def request_currency(call):
         text = request_currency_text,
         parse_mode = 'html',
         reply_markup = inline_markups.register_currency)
-    
-
-    
-
 
 
 
@@ -62,22 +59,33 @@ async def request_currency(call):
 #  Send greeting
 async def send_greeting(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
-    if user_language == 'uzbek':
-        greeting = data.uz_greeting_text
-    else:
-        greeting = data.ru_greeting_text
+    user_firstname = sql.execute(f'SELECT firstname FROM user_access WHERE id = {call.message.chat.id}').fetchone()[0]
 
     await bot.send_message(
-        chat_id = call.message.chat.id, 
-        text = greeting,
+        chat_id = 284929331, 
+        text = f'<b>🎉  Зарегестрировался </b> <code>{user_firstname}</code>',
         parse_mode = 'html')
-
     
+    if user_language == 'uzbek':
+        await bot.send_message(
+            chat_id = call.message.chat.id, 
+            text = f'<b>{user_firstname}</b>, hush kelibsiz bizning servisga  -  <b>"Uz Donate"</b> !',
+            parse_mode = 'html')
+        
+    else:
+        await bot.send_message(
+            chat_id = call.message.chat.id, 
+            text = f'<b>{user_firstname}</b>, добро пожаловать в наш сервис  -  <b>"Uz Donate"</b> !',
+            parse_mode = 'html')
 
 
-#  Send menu (MESSAGE)
+
+
+
+#  Send Menu (MESSAGE)
 async def send_menu_message(message):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         menu = inline_markups.uz_menu
     else:
@@ -89,13 +97,12 @@ async def send_menu_message(message):
             photo = photo,
             parse_mode = 'html',
             reply_markup = menu)
-    
 
-    
-        
-#  Send menu (CALL)
+
+#  Send Menu (CALL)
 async def send_menu_call(call):
     user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    
     if user_language == 'uzbek':
         menu = inline_markups.uz_menu
     else:
@@ -107,10 +114,6 @@ async def send_menu_call(call):
             photo = photo,
             parse_mode = 'html',
             reply_markup = menu)
-
-
-
-
 
 
 

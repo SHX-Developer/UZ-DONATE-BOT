@@ -1,3 +1,6 @@
+rub_course = 139
+
+
 #  Post Content
 uzcard = '💳  UzCard  -  8600120453183769'
 humo = '💳  Humo  -  9860160104516572'
@@ -16,14 +19,15 @@ register_language_text = '''
 '''
 
 
+
 #  Register Currency Text
 ru_register_currency_text = '''
-Выберите валюту:
+💸  Выберите валюту:
 '''
 
 #  Register Currency Text
 uz_register_currency_text = '''
-Valyutani tanlang:
+💸  Valyutani tanlang:
 '''
 
 
@@ -37,12 +41,12 @@ Valyutani tanlang:
 
 #  Greeting Data (RU)
 ru_greeting_text = '''
-Добро пожаловать в - Uz Donate !
+
 '''
 
 #  Greeting Data (UZ)
 uz_greeting_text = '''
-Hush Kelibsiz - Uz Donate !
+
 '''
 
 
@@ -61,13 +65,28 @@ contact_text = '''
 
 
 
-#  Exchange Data
-exchange_info = '''
-<b>Наш обменник валют:
+#  Exchange Data (RU)
+ru_exchange_text = f'''
+<b>♻️  Обменник валют нашего сервиса:</b>
 
-Продажа  -  150 UZS
-Покупка  -  130 UZS
-</b>
+
+➕  <b>Продать валюту:</b>
+        1  RUB   =   {rub_course - 10}  UZS
+
+➖  <b>Купить валюту:</b>
+        1  RUB   =   {rub_course + 10}  UZS
+'''
+
+#  Exchange Data (UZ)
+uz_exchange_text = f'''
+<b>♻️  Bizning xizmatimiz valyuta almashtiruvchisi:</b>
+
+
+➕  <b>Valyuta sotish:</b>
+        1  RUB   =   {rub_course - 10}  UZS
+
+➖  <b>Valyuta sotib olish:</b>
+        1  RUB   =   {rub_course + 10}  UZS
 '''
 
 
@@ -90,11 +109,9 @@ uz_mobile_legends = f'''
 💎  6163  -  875.000  UZS
 
 🏷  Weekly Pass  -  18.000  UZS
-🏷  Twilight Pass  -  00.000  UZS
+🏷  Twilight Pass  -  89.000  UZS
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -114,11 +131,9 @@ ru_mobile_legends = f'''
 💎  6163  -  6.344  RUB
 
 🏷  Weekly Pass  -  130  RUB
-🏷  Twilight Pass  -  000  RUB
+🏷  Twilight Pass  -  636  RUB
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -137,9 +152,7 @@ uz_pubg = f'''
 🏷  RP  -  210.000  UZS
 🏷  Elite RP  -  515.000  UZS
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 #  Pubg (RUB)
@@ -154,9 +167,7 @@ ru_pubg = f'''
 🏷  RP  -  1.442  RUB
 🏷  Elite RP  -  3.608  RUB
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -174,9 +185,7 @@ uz_free_fire = f'''
 💎  4450  -  722.000  UZS
 💎  6900  -  1.085.000  UZS
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -191,9 +200,7 @@ ru_free_fire = f'''
 💎  4450  -  5.061  RUB
 💎  6900  -  7.592  RUB
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -211,9 +218,7 @@ uz_clash_of_clans = f'''
 
 🏷 Gold Pass  -  104.000  UZS
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
@@ -228,9 +233,7 @@ ru_clash_of_clans = f'''
 
 🏷  Gold Pass  -  715  RUB
 
-{donater}
-
-{channel_link} </b>
+{donater}</b>
 '''
 
 
