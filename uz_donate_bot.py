@@ -34,7 +34,7 @@ class States(StatesGroup):
 
 #  Creating Databases
 sql.execute('CREATE TABLE IF NOT EXISTS user_access (id INTEGER, username TEXT, firstname TEXT, lastname TEXT, date DATE)')
-sql.execute('CREATE TABLE IF NOT EXISTS user_data (id INTEGER, language TEXT, currency TEXT)')
+sql.execute('CREATE TABLE IF NOT EXISTS user_data (id INTEGER, language TEXT, currency TEXT, reg_status TEXT)')
 db.commit()
 
 
@@ -52,10 +52,24 @@ async def start_command(message: types.Message):
 
     if user_id == None:
         await functions.add_new_user(message)
-        await functions.send_greeting(message)
-        await functions.send_menu(message)
+        await bot.send_message(
+            chat_id = message.chat.id,
+            text = data.register_language_text,
+            parse_mode = 'html',
+            reply_markup = inline_markups.register_language)
+        
     else:
-        await functions.send_menu(message)
+        user_reg_status = sql.execute(f'SELECT reg_status FROM user_data WHERE id = {message.chat.id}').fetchone()[0]
+        if user_reg_status == 'no':
+            await bot.send_message(
+                chat_id = message.chat.id,
+                text = data.register_language_text,
+                parse_mode = 'html',
+                reply_markup = inline_markups.register_language)
+        
+        elif user_reg_status == 'yes':
+            await functions.send_menu_message(message)
+            
 
 
 
@@ -73,9 +87,47 @@ async def text(message: types.Message):
 async def callback_queries(call: types.CallbackQuery):
 
 
+#  REGISTRATION
+    
+    #  Register Language
+    if call.data == 'reg_uz':
+        sql.execute(f'UPDATE user_data SET language = "uzbek" WHERE id = {call.message.chat.id}')
+        db.commit()
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await functions.request_currency(call)
+
+    elif call.data == 'reg_ru':
+        sql.execute(f'UPDATE user_data SET language = "russian" WHERE id = {call.message.chat.id}')
+        db.commit()
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await functions.request_currency(call)
+
+
+    #  Register Currency
+    elif call.data == 'reg_uzs':
+        sql.execute(f'UPDATE user_data SET currency = "uzs" WHERE id = {call.message.chat.id}')
+        sql.execute(f'UPDATE user_data SET reg_status = "yes" WHERE id = {call.message.chat.id}')
+        db.commit()
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await functions.send_greeting(call)
+        await functions.send_menu_call(call)
+
+    elif call.data == 'reg_rub':
+        sql.execute(f'UPDATE user_data SET currency = "rub" WHERE id = {call.message.chat.id}')
+        sql.execute(f'UPDATE user_data SET reg_status = "yes" WHERE id = {call.message.chat.id}')
+        db.commit()
+        await bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
+        await functions.send_greeting(call)
+        await functions.send_menu_call(call)
+        
+
+
+
+
+
 #  DONATE
     
-    if call.data == 'donate':
+    elif call.data == 'donate':
         await display.display_games(call)
             
 

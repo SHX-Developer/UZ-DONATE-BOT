@@ -1,19 +1,56 @@
+#  Post Content
 uzcard = '💳  UzCard  -  8600120453183769'
 humo = '💳  Humo  -  9860160104516572'
 visa = '💳  Visa  -  4231200009317065'
 qiwi = '💳  Qiwi  -  +998939771412'
-
 donater = '✅  Донатер:  @CyberDonater'
 channel_link = '<a href = "https://t.me/mobile_mlbb_legends">📢  Наш телеграм канал</a>'
 
 
 
-greeting_text = '''
-Добро пожаловать в - Uz Donate !
+
+
+#  Register Language Text
+register_language_text = '''
+🇺🇿  Tilni tanlang  /  Выберите язык  🇷🇺
+'''
+
+
+#  Register Currency Text
+ru_register_currency_text = '''
+Выберите валюту:
+'''
+
+#  Register Currency Text
+uz_register_currency_text = '''
+Valyutani tanlang:
 '''
 
 
 
+
+
+
+
+
+
+
+#  Greeting Data (RU)
+ru_greeting_text = '''
+Добро пожаловать в - Uz Donate !
+'''
+
+#  Greeting Data (UZ)
+uz_greeting_text = '''
+Hush Kelibsiz - Uz Donate !
+'''
+
+
+
+
+
+
+#  Contact Data
 contact_text = '''
 ✅  Донатер:  @CyberDonater
 📢  Канал:  @mobile_mlbb_legends
@@ -22,6 +59,9 @@ contact_text = '''
 
 
 
+
+
+#  Exchange Data
 exchange_info = '''
 <b>Наш обменник валют:
 
@@ -33,6 +73,8 @@ exchange_info = '''
 
 
 
+
+#  Mobile Legends (UZS)
 uz_mobile_legends = f'''
 <b>💎  8  -  1.500  UZS
 💎  35  -  6.000  UZS
@@ -56,59 +98,7 @@ uz_mobile_legends = f'''
 '''
 
 
-
-uz_pubg = f'''
-<b>💵  60  UC  -  13.500  UZS
-💵  325  UC  -  63.000  UZS
-💵  660  UC  -  132.000  UZS
-💵  1800  UC  -  325.000  UZS
-💵  3850  UC  -  645.000  UZS
-💵  8100  UC  -  1.295.000  UZS
-
-🏷  RP  -  210.000  UZS
-🏷  Elite RP  -  515.000  UZS
-
-{donater}
-
-{channel_link} </b>
-'''
-
-
-
-uz_free_fire = f'''
-<b>💎  100  -  17.000  UZS
-💎  210  -  33.000  UZS
-💎  530  -  82.000  UZS
-💎  645  -  110.000  UZS
-💎  1080  -  164.000  UZS
-💎  2200  -  325.000  UZS
-💎  4450  -  722.000  UZS
-💎  6900  -  1.085.000  UZS
-
-{donater}
-
-{channel_link} </b>
-'''
-
-
-
-uz_clash_of_clans = f''' 
-<b>❇️  88  -  15.000  UZS
-❇️  550  -  73.000  UZS
-❇️  1320  -  146.000  UZS
-❇️  2750  -  294.000  UZS
-❇️  7150  -  728.000  UZS
-❇️  15400  -  1.455.000  UZS
-
-🏷 Gold Pass  -  104.000  UZS
-
-{donater}
-
-{channel_link} </b>
-'''
-
-
-
+#  Mobile Legends (RUB)
 ru_mobile_legends = f'''
 <b>💎  8  -  11  RUB
 💎  35  -  44  RUB
@@ -135,8 +125,24 @@ ru_mobile_legends = f'''
 
 
 
+#  Pubg (UZS)
+uz_pubg = f'''
+<b>💵  60  UC  -  13.500  UZS
+💵  325  UC  -  63.000  UZS
+💵  660  UC  -  132.000  UZS
+💵  1800  UC  -  325.000  UZS
+💵  3850  UC  -  645.000  UZS
+💵  8100  UC  -  1.295.000  UZS
 
+🏷  RP  -  210.000  UZS
+🏷  Elite RP  -  515.000  UZS
 
+{donater}
+
+{channel_link} </b>
+'''
+
+#  Pubg (RUB)
 ru_pubg = f'''
 <b>💵  60 UC  -  91  RUB
 💵  325 UC  -  440  RUB
@@ -155,6 +161,26 @@ ru_pubg = f'''
 
 
 
+
+
+#  Free Fire (UZS)
+uz_free_fire = f'''
+<b>💎  100  -  17.000  UZS
+💎  210  -  33.000  UZS
+💎  530  -  82.000  UZS
+💎  645  -  110.000  UZS
+💎  1080  -  164.000  UZS
+💎  2200  -  325.000  UZS
+💎  4450  -  722.000  UZS
+💎  6900  -  1.085.000  UZS
+
+{donater}
+
+{channel_link} </b>
+'''
+
+
+#  Free Fire (RUB)
 ru_free_fire = f'''
 <b>💎  100  -  113  RUB
 💎  210  -  227  RUB
@@ -172,6 +198,26 @@ ru_free_fire = f'''
 
 
 
+
+
+#  Clash Of Clans (UZS)
+uz_clash_of_clans = f''' 
+<b>❇️  88  -  15.000  UZS
+❇️  550  -  73.000  UZS
+❇️  1320  -  146.000  UZS
+❇️  2750  -  294.000  UZS
+❇️  7150  -  728.000  UZS
+❇️  15400  -  1.455.000  UZS
+
+🏷 Gold Pass  -  104.000  UZS
+
+{donater}
+
+{channel_link} </b>
+'''
+
+
+#  Clash Of Clans (RUB)
 ru_clash_of_clans = f''' 
 <b>❇️  88  -  101  RUB
 ❇️  550  -  511  RUB
@@ -186,3 +232,19 @@ ru_clash_of_clans = f'''
 
 {channel_link} </b>
 '''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

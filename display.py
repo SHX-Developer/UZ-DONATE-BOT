@@ -23,6 +23,12 @@ sql = db.cursor()
 
 #  Display Menu
 async def display_menu(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        menu = inline_markups.uz_menu
+    else:
+        menu = inline_markups.ru_menu
+
     with open('photo/channel_photo.jpg', 'rb') as photo:
         await bot.edit_message_media(
             media = types.InputMedia(
@@ -30,12 +36,18 @@ async def display_menu(call):
             media = photo),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.menu)
+            reply_markup = menu)
 
 
 
 #  Display Games
 async def display_games(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        games = inline_markups.uz_games
+    else:
+        games = inline_markups.ru_games
+
     with open('photo/games_photo.jpg', 'rb') as photo:
         await bot.edit_message_media(
             media = types.InputMedia(
@@ -43,7 +55,7 @@ async def display_games(call):
             media = photo),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.games)
+            reply_markup = games)
         
 
 
@@ -52,10 +64,17 @@ async def display_games(call):
 #  Display Mobile Legends Prices
 async def display_mobile_legends(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+
     if user_currency == 'uzs':
         price = data.uz_mobile_legends
     elif user_currency == 'rub':
         price = data.ru_mobile_legends
+    
+    if user_language == 'uzbek':
+        mobile_legends = inline_markups.uz_mobile_legends
+    else:
+        mobile_legends = inline_markups.ru_mobile_legends
 
     with open(f"photo/mobile_legends_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
@@ -66,16 +85,23 @@ async def display_mobile_legends(call):
             caption = price),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.mobile_legends)
+            reply_markup = mobile_legends)
 
 
 #  Display Pubg
 async def display_pubg(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+
     if user_currency == 'uzs':
         price = data.uz_pubg
     elif user_currency == 'rub':
         price = data.ru_pubg
+    
+    if user_language == 'uzbek':
+        pubg = inline_markups.uz_pubg
+    else:
+        pubg = inline_markups.ru_pubg
 
     with open(f"photo/pubg_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
@@ -86,16 +112,23 @@ async def display_pubg(call):
             caption = price),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.pubg)
+            reply_markup = pubg)
 
 
 #  Display Free Fire
 async def display_free_fire(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+
     if user_currency == 'uzs':
         price = data.uz_free_fire
     elif user_currency == 'rub':
         price = data.ru_free_fire
+    
+    if user_language == 'uzbek':
+        free_fire = inline_markups.uz_free_fire
+    else:
+        free_fire = inline_markups.ru_free_fire
 
     with open(f"photo/free_fire_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
@@ -106,16 +139,23 @@ async def display_free_fire(call):
             caption = price),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.free_fire)
+            reply_markup = free_fire)
 
 
 #  Display Clash Of Clans
 async def display_clash_of_clans(call):
     user_currency = sql.execute(f'SELECT currency FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+
     if user_currency == 'uzs':
         price = data.uz_clash_of_clans
     elif user_currency == 'rub':
         price = data.ru_clash_of_clans
+    
+    if user_language == 'uzbek':
+        clash_of_clans = inline_markups.uz_clash_of_clans
+    else:
+        clash_of_clans = inline_markups.ru_clash_of_clans
 
     with open(f"photo/clash_of_clans_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
@@ -126,13 +166,19 @@ async def display_clash_of_clans(call):
             caption = price),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.clash_of_clans)
+            reply_markup = clash_of_clans)
 
 
 
 
 #  Contact
 async def display_contact(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        contact = inline_markups.uz_contact
+    else:
+        contact = inline_markups.ru_contact
+
     with open(f"photo/contact_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
             media = types.InputMedia(
@@ -141,7 +187,7 @@ async def display_contact(call):
             parse_mode = 'html'),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.contact)
+            reply_markup = contact)
 
 
 
@@ -152,6 +198,12 @@ async def display_contact(call):
 
 #  Display Exchange
 async def display_exchange(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        exchange = inline_markups.uz_exchange
+    else:
+        exchange = inline_markups.ru_exchange
+
     with open(f"photo/exchange_photo.jpg", "rb") as photo:
         await bot.edit_message_media(
             media = types.InputMedia(
@@ -161,7 +213,7 @@ async def display_exchange(call):
             caption = data.exchange_info),
             chat_id = call.message.chat.id,
             message_id = call.message.message_id,
-            reply_markup = inline_markups.exchange)
+            reply_markup = exchange)
 
 
 

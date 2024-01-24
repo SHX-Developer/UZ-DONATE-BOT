@@ -24,31 +24,90 @@ date_time = datetime.datetime.now().date()
 
 
 
+
+
 #  Add new user data to database
 async def add_new_user(message):
     sql.execute('INSERT INTO user_access (id, username, firstname, lastname, date) VALUES (?, ?, ?, ?, ?)',
     (message.chat.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name, date_time))
-    sql.execute('INSERT INTO user_data (id, language, currency) VALUES (?, ?, ?)',
-    (message.chat.id, 'uzbek', 'uzs'))
+    sql.execute('INSERT INTO user_data (id, language, currency, reg_status) VALUES (?, ?, ?, ?)',
+    (message.chat.id, '-', '-', 'no'))
     db.commit()
 
 
 
-#  Send greeting
-async def send_greeting(message):
-    await bot.send_message(message.chat.id, data.greeting_text)
+
+#  Request Currency
+async def request_currency(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        request_currency_text = data.uz_register_currency_text
+    else:
+        request_currency_text = data.ru_register_currency_text
+
+    await bot.send_message(
+        chat_id = call.message.chat.id,
+        text = request_currency_text,
+        parse_mode = 'html',
+        reply_markup = inline_markups.register_currency)
+    
 
     
 
-#  Send menu
-async def send_menu(message):
+
+
+
+
+
+#  Send greeting
+async def send_greeting(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        greeting = data.uz_greeting_text
+    else:
+        greeting = data.ru_greeting_text
+
+    await bot.send_message(
+        chat_id = call.message.chat.id, 
+        text = greeting,
+        parse_mode = 'html')
+
+    
+
+
+#  Send menu (MESSAGE)
+async def send_menu_message(message):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        menu = inline_markups.uz_menu
+    else:
+        menu = inline_markups.ru_menu
+    
     with open('photo/channel_photo.jpg', 'rb') as photo:
         await bot.send_photo(
             chat_id = message.chat.id,
             photo = photo,
             parse_mode = 'html',
-            reply_markup = inline_markups.menu)
-    await bot.send_message(message.chat.id, 'Выберите действие:')
+            reply_markup = menu)
+    
+
+    
+        
+#  Send menu (CALL)
+async def send_menu_call(call):
+    user_language = sql.execute(f'SELECT language FROM user_data WHERE id = {call.message.chat.id}').fetchone()[0]
+    if user_language == 'uzbek':
+        menu = inline_markups.uz_menu
+    else:
+        menu = inline_markups.ru_menu
+    
+    with open('photo/channel_photo.jpg', 'rb') as photo:
+        await bot.send_photo(
+            chat_id = call.message.chat.id,
+            photo = photo,
+            parse_mode = 'html',
+            reply_markup = menu)
+
 
 
 
